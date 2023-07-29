@@ -5,7 +5,7 @@
 Сканер адресов счетчиков Меркурий200
 
 Подготовка:
-pip install modbus_crc
+pip install modbus_crc \r\n
 pip install argparse
 pip install pyserial
 pip install struct
