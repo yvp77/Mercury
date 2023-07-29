@@ -5,7 +5,7 @@ git clone https://github.com/yvp77/Mercury.git
 
 
 # Сканер
-Сканер адресов CAN шины счетчиков Меркурий200
+Сканер адресов CAN шины счетчиков Меркурий200 зашифрованных ПО Наладчик+
 
 Подготовка:<br>
 pip install modbus_crc<br>
