@@ -20,6 +20,16 @@ pip install struct<br>
 ./Mercury200.py COM5 9600 23 55
 
 # Опрос
+
+Подготовка:
+
+pip install modbus_crc<br>
+pip install argparse<br>
+pip install pyserial<br>
+pip install struct<br>
+pip install re<br>
+pip install json<br>
+
 Скрипт запускается с параметрами
 
 <КОМ_ПОРТ> /dev/ttyUSB0 или для Windows COM1<br>
