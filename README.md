@@ -11,10 +11,14 @@ pip install pyserial<br>
 pip install struct<br>
 
 Запуск linux:<br>
-./Mercury200.py /dev/ttyUSB0 9600 23 55<br>
+./Mercury200_scan.py /dev/ttyUSB0 9600 23 55<br>
 <br>
 Запуск в Windows:<br>
-./Mercury200.py COM5 9600 23 55<br>
+./Mercury200_scan.py COM5 9600 23 55<br>
+
+./Mercury200_scan.py <КОМ_ПОРТ> <СКОРОСТЬ> <НАЧ_НОМЕР_КВ> <ПОСЛЕДНИЙ_НОМЕР_КВ> <br>
+
+Запуск без параметров сканирует номера от 1 до 1001
 
 # Опрос
 
