@@ -22,31 +22,22 @@ pip install struct<br>
 # Опрос
 Скрипт запускается с параметрами
 
-<КОМ_ПОРТ> /dev/ttyUSB0 или для Windows COM1
-
-<СКОРОСТЬ> стандартные скорости портов, по умолчанию 9600
-
-<АДРЕС> адрес счетчика по умолчанию - 0 , можно указывать следующие форматы, 6 последних цифр серийного номера, в формате Наладчик+ kv123 
-
-<ФОРМАТ> в каком формате выдавать данные csv или json, по умолчанию json 
+<КОМ_ПОРТ> /dev/ttyUSB0 или для Windows COM1<br>
+<СКОРОСТЬ> стандартные скорости портов, по умолчанию 9600<br>
+<АДРЕС> адрес счетчика по умолчанию - 0 , можно указывать следующие форматы, 6 последних цифр серийного номера, в формате Наладчик+ kv123<br>
+<ФОРМАТ> в каком формате выдавать данные csv или json, по умолчанию json<br>
 
 Запуск linux:
 
- ./Mercury200.py /dev/ttyUSB0 9600 512230
- 
- ./Mercury200.py /dev/ttyUSB0 9600 kv125
- 
- ./Mercury200.py /dev/ttyUSB0 9600 kv125 csv
- 
- ./Mercury200.py /dev/ttyUSB0 9600 kv125 json
+./Mercury200.py /dev/ttyUSB0 9600 512230<br>
+./Mercury200.py /dev/ttyUSB0 9600 kv125<br>
+./Mercury200.py /dev/ttyUSB0 9600 kv125 csv<br>
+./Mercury200.py /dev/ttyUSB0 9600 kv125 json<br>
 
 
 Запуск в Windows:
 
- ./Mercury200.py COM1 9600 512230
- 
- ./Mercury200.py COM1 9600 kv125
- 
- ./Mercury200.py COM1 9600 kv125 csv
- 
- ./Mercury200.py COM1 9600 kv125 json
+./Mercury200.py COM1 9600 512230<br>
+./Mercury200.py COM1 9600 kv125<br>
+./Mercury200.py COM1 9600 kv125 csv<br>
+./Mercury200.py COM1 9600 kv125 json<br>
