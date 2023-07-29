@@ -6,13 +6,10 @@
 
 Подготовка:
 
-pip install modbus_crc
-
-pip install argparse
-
-pip install pyserial
-
-pip install struct
+pip install modbus_crc<br>
+pip install argparse<br>
+pip install pyserial<br>
+pip install struct<br>
 
 Запуск linux:
 
