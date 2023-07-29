@@ -1,0 +1,305 @@
+zabbix_export:
+  version: '6.2'
+  date: '2023-07-29T09:46:42Z'
+  template_groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+    -
+      uuid: 3dcd5bbe90534f9e8eb5c2d53756af63
+      name: Templates/Power
+  templates:
+    -
+      uuid: 7ca8469a128f447ebd48df8827c30d51
+      template: Template_Mercury200_json
+      name: Template_Mercury200_json
+      groups:
+        -
+          name: Templates
+        -
+          name: Templates/Power
+      items:
+        -
+          uuid: 6ee28b67bd8f4b56bdc379bed224d2e5
+          name: Ток
+          type: DEPENDENT
+          key: I
+          delay: '0'
+          value_type: FLOAT
+          units: А
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.I.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 42bcb274e2164777b99f3e090f91b407
+          name: Запрос
+          key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+          delay: '30'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.Mercury
+              error_handler: DISCARD_VALUE
+        -
+          uuid: 7450a1839dac47c3ad7c126e99ededb1
+          name: Мощность
+          type: DEPENDENT
+          key: P
+          delay: '0'
+          value_type: FLOAT
+          units: Вт
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.P.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 6cbe6b0bf56e494989b1a8b67bf88e71
+          name: 'Питание пропадало'
+          type: DEPENDENT
+          key: powerDown
+          delay: '0'
+          units: unixtime
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.powerDown.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 1ed55dedcc0741c9b78d72cd3452940d
+          name: 'Питание появилось'
+          type: DEPENDENT
+          key: powerUp
+          delay: '0'
+          units: unixtime
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.powerUp.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 1c8c9f7554144dc791cb98bc6d756916
+          name: 'Серийный номер'
+          type: DEPENDENT
+          key: sn.mercury
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.sn.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 2433a92464c54aebab6a44ac45be9f6a
+          name: 'T1 за прошлое 20 число'
+          type: CALCULATED
+          key: T1-m20
+          delay: 0;md20h0m00
+          params: last(/mercury.fttbkhv.ru/T1)
+        -
+          uuid: 416cbb8e151d42069ca7a1c3deb6ca87
+          name: 'T2 за прошлое 20 число'
+          type: CALCULATED
+          key: T2-m20
+          delay: 0;md20h0m00
+          params: last(/mercury.fttbkhv.ru/T2)
+        -
+          uuid: 95ec78fb35fe45d4b7349319582d520b
+          name: 'T3 за прошлое 20 число'
+          type: CALCULATED
+          key: T3-m20
+          delay: 0;md20h0m00
+          params: last(/mercury.fttbkhv.ru/T3)
+        -
+          uuid: 51dbe33c85e34ab7b651526757ada096
+          name: T1
+          type: DEPENDENT
+          key: Tarif_T1
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.Tarif_T1.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 9d7ab7678e4e478a8aa28425438c967a
+          name: T2
+          type: DEPENDENT
+          key: Tarif_T2
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.Tarif_T2.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 182a03a2e2c84114a53e7f039f45939c
+          name: T3
+          type: DEPENDENT
+          key: Tarif_T3
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.Tarif_T3.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: 25318f5a8bf44df1bafa1293b8a06fe3
+          name: Напряжение
+          type: DEPENDENT
+          key: U
+          delay: '0'
+          value_type: FLOAT
+          units: В
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.U.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+        -
+          uuid: c185bce4d4f747368728faa88f1514ab
+          name: Батарейка
+          type: DEPENDENT
+          key: uBat
+          delay: '0'
+          value_type: FLOAT
+          units: В
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - '$.{$ADDRESS}..data.uBat.first()'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: 'mercury_json[{$MODEM},{$SPEED},{$ADDRESS},{$FORMAT}]'
+      macros:
+        -
+          macro: '{$ADDRESS}'
+          value: kv0
+        -
+          macro: '{$FORMAT}'
+          value: json
+        -
+          macro: '{$MODEM}'
+          value: /dev/ttyUSB0
+        -
+          macro: '{$SPEED}'
+          value: '9600'
+  triggers:
+    -
+      uuid: de7dbe0f8e5b4ef0907ee47e5808c900
+      expression: 'last(/Template_Mercury200_json/Tarif_T1) or last(/Template_Mercury200_json/Tarif_T2) or last(/Template_Mercury200_json/Tarif_T3) and (dayofmonth()=26 and time()=132700)'
+      name: 'Энергия за 20 число'
+      opdata: 'Эл.Показания Т1:{ITEM.LASTVALUE1} Т2:{ITEM.LASTVALUE2} Т3:{ITEM.LASTVALUE3}'
+      priority: INFO
+      manual_close: 'YES'
+  graphs:
+    -
+      uuid: 3133a9b2a29a423ab386d51e7ac42e83
+      name: Потребление
+      width: '450'
+      height: '300'
+      yaxismax: '0'
+      show_work_period: 'NO'
+      show_triggers: 'NO'
+      type: EXPLODED
+      show_3d: 'YES'
+      graph_items:
+        -
+          color: E53935
+          calc_fnc: MAX
+          item:
+            host: Template_Mercury200_json
+            key: Tarif_T1
+        -
+          sortorder: '1'
+          color: 43A047
+          calc_fnc: MAX
+          item:
+            host: Template_Mercury200_json
+            key: Tarif_T2
+        -
+          sortorder: '2'
+          color: FFB300
+          calc_fnc: MAX
+          item:
+            host: Template_Mercury200_json
+            key: Tarif_T3
+    -
+      uuid: ce1a905220f444d0ad9bbce6658da482
+      name: Т1
+      width: '450'
+      show_work_period: 'NO'
+      show_triggers: 'NO'
+      graph_items:
+        -
+          drawtype: GRADIENT_LINE
+          color: E53935
+          calc_fnc: MAX
+          item:
+            host: Template_Mercury200_json
+            key: Tarif_T1
+    -
+      uuid: 5ff8154a95da4fd9a03ffc5974c25619
+      name: Т2
+      width: '450'
+      show_work_period: 'NO'
+      show_triggers: 'NO'
+      graph_items:
+        -
+          drawtype: GRADIENT_LINE
+          color: 43A047
+          calc_fnc: MAX
+          item:
+            host: Template_Mercury200_json
+            key: Tarif_T2
+    -
+      uuid: f113d37e6f744a07b57483e21a745da5
+      name: Т3
+      width: '450'
+      show_work_period: 'NO'
+      show_triggers: 'NO'
+      graph_items:
+        -
+          drawtype: GRADIENT_LINE
+          color: FFB300
+          calc_fnc: MAX
+          item:
+            host: Template_Mercury200_json
+            key: Tarif_T3
