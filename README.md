@@ -4,7 +4,7 @@
 # Сканер
 Сканер адресов счетчиков Меркурий200
 
-Подготовка:
+Подготовка:<br>
 <code>
 pip install modbus_crc<br>
 pip install argparse<br>
