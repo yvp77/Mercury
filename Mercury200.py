@@ -26,7 +26,7 @@
 #
 #
 # Примеры Windows:
-# ./Mercury200.py COM1 9600 512230
+# ./Mercury200.py COM1 9600 123321
 # ./Mercury200.py COM1 9600 kv125
 # ./Mercury200.py COM1 9600 kv125 csv
 # ./Mercury200.py COM1 9600 kv125 json
