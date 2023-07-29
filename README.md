@@ -53,3 +53,19 @@ pip install json<br>
 ./Mercury200.py COM1 9600 kv125<br>
 ./Mercury200.py COM1 9600 kv125 csv<br>
 ./Mercury200.py COM1 9600 kv125 json<br>
+
+# Zabbix
+
+Mercury200.py копируем в /etc/zabbix/scripts
+Файл mercury200.conf копируем в папку агента, пезепускаем агент
+
+Импортируем шаблон, в шаблоне есть макросы:
+{$MODEM} - по умолчанию /dev/ttyUSB0<br>
+{$SPEED} - по умолчанию 9600<br>
+{$ADDRESS} - по умолчанию kv0<br>
+{$FORMAT} - по умолчанию json<br>
+
+После создания хоста и привязки шаблона необходимо в макросах хоста указать требуемые вам значения
+
+
+
