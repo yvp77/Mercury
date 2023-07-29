@@ -5,10 +5,10 @@
 Сканер адресов счетчиков Меркурий200
 
 Подготовка:
- pip install modbus_crc
- pip install argparse
- pip install pyserial
- pip install struct
+pip install modbus_crc
+pip install argparse
+pip install pyserial
+pip install struct
 
 Запуск linux:
 ./Mercury200.py /dev/ttyUSB0 9600 23 55
