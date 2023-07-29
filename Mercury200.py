@@ -18,7 +18,7 @@
 # <адрес_счетчика> последние 6 цифр серийного номера, или в формате Наладчик+ kv<NNN>, где <NNN> номер квартиры/дома
 #
 # Примеры linux:
-# ./Mercury200.py /dev/ttyUSB0 9600 512230
+# ./Mercury200.py /dev/ttyUSB0 9600 123321
 # ./Mercury200.py /dev/ttyUSB0 9600 kv125
 # ./Mercury200.py /dev/ttyUSB0 9600 kv125 csv
 # ./Mercury200.py /dev/ttyUSB0 9600 kv125 json
