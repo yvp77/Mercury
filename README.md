@@ -10,18 +10,15 @@ pip install argparse<br>
 pip install pyserial<br>
 pip install struct<br>
 
-Запуск linux:
-
-./Mercury200.py /dev/ttyUSB0 9600 23 55
-
-Запуск в Windows:
-
-./Mercury200.py COM5 9600 23 55
+Запуск linux:<br>
+./Mercury200.py /dev/ttyUSB0 9600 23 55<br>
+<br>
+Запуск в Windows:<br>
+./Mercury200.py COM5 9600 23 55<br>
 
 # Опрос
 
-Подготовка:
-
+Подготовка:<br>
 pip install modbus_crc<br>
 pip install argparse<br>
 pip install pyserial<br>
