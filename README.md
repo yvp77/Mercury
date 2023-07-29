@@ -56,7 +56,7 @@ pip install json<br>
 
 # Zabbix
 
-Mercury200.py копируем в /etc/zabbix/scripts
+Mercury200.py копируем в /etc/zabbix/scripts<br>
 Файл mercury200.conf копируем в папку агента, пезепускаем агент
 
 Импортируем шаблон, в шаблоне есть макросы:<br>
