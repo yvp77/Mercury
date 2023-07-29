@@ -18,7 +18,7 @@
 # ./Mercury200.py /dev/ttyUSB0 9600 23 55
 #
 #
-# Примеры Wondows:
+# Примеры Windows:
 # ./Mercury200.py COM5 9600 23 55
 #
 #
