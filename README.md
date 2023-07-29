@@ -41,7 +41,7 @@ pip install json<br>
 
 Запуск linux:
 
-./Mercury200.py /dev/ttyUSB0 9600 512230<br>
+./Mercury200.py /dev/ttyUSB0 9600 123321<br>
 ./Mercury200.py /dev/ttyUSB0 9600 kv125<br>
 ./Mercury200.py /dev/ttyUSB0 9600 kv125 csv<br>
 ./Mercury200.py /dev/ttyUSB0 9600 kv125 json<br>
