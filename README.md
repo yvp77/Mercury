@@ -1,5 +1,5 @@
 # Mercury
-ПО для счетчиков Меркурий 200.2<br>
+Скрипт для опроса счетчиков Меркурий 200.2<br>
 
 git clone https://github.com/yvp77/Mercury.git
 
