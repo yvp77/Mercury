@@ -18,7 +18,7 @@
 # <адрес_счетчика> последние 6 цифр серийного номера, или в формате Наладчик+ kv<NNN>, где <NNN> номер квартиры/дома
 #
 # Примеры linux:
-# ./Mercury200.py /dev/ttyUSB0 9600 123321
+# ./Mercury200.py /dev/ttyUSB0 9600 512230
 # ./Mercury200.py /dev/ttyUSB0 9600 kv125
 # ./Mercury200.py /dev/ttyUSB0 9600 kv125 csv
 # ./Mercury200.py /dev/ttyUSB0 9600 kv125 json
@@ -26,7 +26,7 @@
 #
 #
 # Примеры Windows:
-# ./Mercury200.py COM1 9600 123321
+# ./Mercury200.py COM1 9600 512230
 # ./Mercury200.py COM1 9600 kv125
 # ./Mercury200.py COM1 9600 kv125 csv
 # ./Mercury200.py COM1 9600 kv125 json
@@ -62,23 +62,24 @@ parser.add_argument('serial',  nargs='?', default='/dev/ttyUSB0', help='COM-по
 parser.add_argument('baudrate',  nargs='?', default='9600', help='Скрость COM порта')
 parser.add_argument('dev_sn',  nargs='?', default='0', help='Серийный номер счетчика, последние 6 цифр серийного номера, либо в формате Наладчик+ kv<NNN>, например kv125')
 parser.add_argument('format',  nargs='?', default='csv', help='Формат вывода данных csv или json')
+parser.add_argument('info',  nargs='?', default='noinfo', help='Показать дополнительную информацию')
 args = parser.parse_args()
 
 
 intext = args.dev_sn
 format = args.format
-
+info = str(args.info)
 
 if re.search('kv', intext): # Проверяем текст на то что он начинается с символов kv
-   print('Адрес введен в формате Наладчик+')
+   print('Адрес введен в формате Наладчик+') if info=='info' or format=='info' else ''
 #Отрезаем первые два символа
    number = intext[2:]
-   print('Номер квартиры/дома:',number)
+   print('Номер квартиры/дома:',number) if info=='info' or format=='info' else ''
 #Расчитываем адрес наладчик+
    addr = ((8*int(number))+3)+4194304000
 
 else:
-   print('Введен класический адрес')
+   print('Введен класический адрес') if info=='info' or format=='info' else ''
    addr = intext
 
 
@@ -87,10 +88,10 @@ baudrate=args.baudrate
 addr = int(addr)
 #insn = int(args.dev_sn)
 addr_hex = hex(int(addr)).split('x')[-1]
-print ('Cетевой адрес:',addr,'HEX адрес:',addr_hex)
+print ('Cетевой адрес:',addr,'HEX адрес:',addr_hex) if info=='info' or format=='info' else ''
 # Открываем порт с параметрами
 ser = serial.Serial(com, baudrate, serial.EIGHTBITS, serial.PARITY_NONE, serial.STOPBITS_ONE)
-print ('Подключение через',com,':', ser.isOpen())
+print ('Подключение через',com,':', ser.isOpen()) if info=='info' or format=='info' else ''
 
 # There are commands for get different data:
 
@@ -114,7 +115,7 @@ signed_package = add_crc(chunk)
 ser.write(signed_package)
 time.sleep(0.12)
 out = ser.read_all()
-print ('Результат сер. номер HEXResult:', ':'.join('{:02x}'.format(c) for c in out))
+print ('Результат сер. номер HEXResult:', ':'.join('{:02x}'.format(c) for c in out)) if info=='info' or format=='info' else ''
 sn = ''.join('{:02x}'.format(c) for c in out[5:9])
 #t2 = ''.join('{:02x}'.format(c) for c in out[9:13])
 #t3 = ''.join('{:02x}'.format(c) for c in out[13:17])
@@ -132,7 +133,7 @@ signed_package2 = add_crc(chunk2)
 ser.write(signed_package2)
 time.sleep(0.12)
 out = ser.read_all()
-print ('Результат по тарифам HEXResult:', ':'.join('{:02x}'.format(c) for c in out))
+print ('Результат по тарифам HEXResult:', ':'.join('{:02x}'.format(c) for c in out)) if info=='info' or format=='info' else ''
 t1 = ''.join('{:02x}'.format(c) for c in out[5:9])
 t2 = ''.join('{:02x}'.format(c) for c in out[9:13])
 t3 = ''.join('{:02x}'.format(c) for c in out[13:17])
@@ -148,7 +149,7 @@ signed_package3 = add_crc(chunk3)
 ser.write(signed_package3)
 time.sleep(0.12)
 out = ser.read_all()
-print ('Результат мгновенных HEXResult:', ':'.join('{:02x}'.format(c) for c in out))
+print ('Результат мгновенных HEXResult:', ':'.join('{:02x}'.format(c) for c in out)) if info=='info' or format=='info' else ''
 u = ''.join('{:02x}'.format(c) for c in out[5:7])
 i = ''.join('{:02x}'.format(c) for c in out[7:9])
 p = ''.join('{:02x}'.format(c) for c in out[9:12])
@@ -163,7 +164,7 @@ signed_package4 = add_crc(chunk4)
 ser.write(signed_package4)
 time.sleep(0.12)
 out = ser.read_all()
-print ('Результат Батарейка  HEXResult:', ':'.join('{:02x}'.format(c) for c in out))
+print ('Результат Батарейка  HEXResult:', ':'.join('{:02x}'.format(c) for c in out)) if info=='info' or format=='info' else ''
 uBat = ''.join('{:02x}'.format(c) for c in out[5:7])
 
 
@@ -175,7 +176,7 @@ signed_package5 = add_crc(chunk5)
 ser.write(signed_package5)
 time.sleep(0.12)
 out = ser.read_all()
-print ('Пропадание питания   HEXResult:', ':'.join('{:02x}'.format(c) for c in out))
+print ('Пропадание питания   HEXResult:', ':'.join('{:02x}'.format(c) for c in out)) if info=='info' or format=='info' else ''
 #DOW День недели 0-воскресенье, 1-понедельник,....., 6-суббота, 7-праздник
 pd_dow = ''.join('{:02x}'.format(c) for c in out[5:6])
 pd_hh = ''.join('{:02x}'.format(c) for c in out[6:7])
@@ -195,7 +196,7 @@ signed_package6 = add_crc(chunk6)
 ser.write(signed_package6)
 time.sleep(0.12)
 out = ser.read_all()
-print ('Появилось питание    HEXResult:', ':'.join('{:02x}'.format(c) for c in out))
+print ('Появилось питание    HEXResult:', ':'.join('{:02x}'.format(c) for c in out)) if info=='info' or format=='info' else ''
 #DOW День недели 0-воскресенье, 1-понедельник,....., 6-суббота, 7-праздник
 pu_dow = ''.join('{:02x}'.format(c) for c in out[5:6])
 pu_hh = ''.join('{:02x}'.format(c) for c in out[6:7])
@@ -214,10 +215,10 @@ ser.close()
 
 
 #Вывод данных
-print ('Считан серийный номер SN:',int(sn,16))
-print ('Питание пропадало: ',pd_dd,'.',pd_mon,'.',pd_yy,' в ',pd_hh,':',pd_mm,':',pd_ss,'; Unixtime=',int(power_down), sep='')
-print ('Питание появилось: ',pu_dd,'.',pu_mon,'.',pu_yy,' в ',pu_hh,':',pu_mm,':',pu_ss,'; Unixtime=',int(power_up), sep='')
-print ('Напряжение батарейки: ',int(uBat)*0.01,' В', sep='')
+print ('Считан серийный номер SN:',int(sn,16)) if info=='info' or format=='info' else ''
+print ('Питание пропадало: ',pd_dd,'.',pd_mon,'.',pd_yy,' в ',pd_hh,':',pd_mm,':',pd_ss,'; Unixtime=',int(power_down), sep='') if info=='info' or format=='info' else ''
+print ('Питание появилось: ',pu_dd,'.',pu_mon,'.',pu_yy,' в ',pu_hh,':',pu_mm,':',pu_ss,'; Unixtime=',int(power_up), sep='') if info=='info' or format=='info' else ''
+print ('Напряжение батарейки: ',int(uBat)*0.01,' В', sep='') if info=='info' or format=='info' else ''
 
 
 sn = int(sn,16)
@@ -235,9 +236,9 @@ power_up = int(power_up)
 
 if format == 'csv':
 
-   print ('  Сер.номер','Тариф_Т1','Тариф_Т2','Тариф_Т3','Т4','Напряжение','Ток','Мощность','Бат','ПропалоПИТ','ПоявилосьПИТ',sep=';')
+   print ('  Сер.номер','Тариф_Т1','Тариф_Т2','Тариф_Т3','Т4','Напряжение','Ток','Мощность','Бат','ПропалоПИТ','ПоявилосьПИТ',sep=';') if info=='info' or format=='info' else ''
    # Формат чисел  print('{:.2f}'.format(2323.12345) обрезает до 2-х знаков после .
-   print ('Data',sn,t1,t2,t3,t4,u,i,p,uBat,power_down,power_up,sep=';')
+   print ('Mercury',sn,t1,t2,t3,t4,u,i,p,uBat,power_down,power_up,sep=';')
 
 else:
 
