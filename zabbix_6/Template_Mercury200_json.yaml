@@ -116,21 +116,21 @@ zabbix_export:
           type: CALCULATED
           key: T1-m20
           delay: 0;md20h0m00
-          params: last(/mercury.fttbkhv.ru/T1)
+          params: last(/{HOST.HOST}/T1)
         -
           uuid: 416cbb8e151d42069ca7a1c3deb6ca87
           name: 'T2 за прошлое 20 число'
           type: CALCULATED
           key: T2-m20
           delay: 0;md20h0m00
-          params: last(/mercury.fttbkhv.ru/T2)
+          params: last(/{HOST.HOST}/T2)
         -
           uuid: 95ec78fb35fe45d4b7349319582d520b
           name: 'T3 за прошлое 20 число'
           type: CALCULATED
           key: T3-m20
           delay: 0;md20h0m00
-          params: last(/mercury.fttbkhv.ru/T3)
+          params: last(/{HOST.HOST}/T3)
         -
           uuid: 51dbe33c85e34ab7b651526757ada096
           name: T1
